@@ -1,0 +1,65 @@
+def simple_ai_chatbot(user_input, category):
+    user_input = user_input.lower()
+
+    if category == 1:
+        response_prefix = "If you have concerns, it's advisable to consult a healthcare professional."
+        if any(greeting in user_input for greeting in ["hello", "hi", "hey"]):
+            return "Hello! How can I assist you today?"
+        if "symptoms" in user_input and any(keyword in user_input for keyword in ["cold", "common cold"]):
+            return f"Common cold symptoms may include sneezing, runny or stuffy nose, sore throat, and coughing. {response_prefix}"
+        if "symptoms" in user_input and any(keyword in user_input for keyword in ["diabetes", "type 1 diabetes", "type 2 diabetes"]):
+            return f"Symptoms of diabetes can include increased thirst, frequent urination, unexplained weight loss, fatigue, blurred vision, and slow wound healing. {response_prefix}"
+        if "symptoms" in user_input and any(keyword in user_input for keyword in ["flu", "influenza"]):
+            return f"Influenza symptoms are similar to the common cold but are often more severe and may include fever, body aches, fatigue, and respiratory symptoms. Rest and hydration are important, and antiviral medications may be prescribed in some cases. {response_prefix}"
+        if "symptoms" in user_input and any(keyword in user_input for keyword in ["high blood pressure", "hypertension"]):
+            return f"High blood pressure symptoms often includes severe headaches,chest pain,dizziness,nausea,vomiting.It may lead to serious health issues such as heart disease and stroke. {response_prefix}"
+        elif "return" in user_input or "back" in user_input:
+            return "Returning to the main menu."
+        else:
+            return "I'm not sure how to respond to that. Please ask me something else."
+
+    elif category == 2:
+        if any(keyword in user_input for keyword in ["who are you", "what are you"]):
+            return "I am a Simple AI Chatbot(Rule-Based) designed to assist you with information and support."
+        elif any(keyword in user_input for keyword in ["help", "features", "commands", "what can you do"]):
+            return "You can ask me about health-related queries. Additionally, I can provide chatbot related general information. Feel free to explore!"
+        elif any(keyword in user_input for keyword in ["thank you", "thanks"]):
+            return "You're welcome! If you have more questions, feel free to ask."
+        elif any(keyword in user_input for keyword in ["joke", "tell me a joke"]):
+            return "Sure, here's a joke: Why don't scientists trust atoms? Because they make up everything!"
+        elif "return" in user_input or "back" in user_input:
+            return "Returning to the main menu."
+        else:
+            return "I'm not sure how to respond to that. Please ask me something else."
+print("-----WELCOME-----")
+print("Choose a category:")
+print("1. Healthcare-related queries")
+print("2. General queries regarding Chatbot")
+category_choice = input("Enter '1' for healthcare or '2' for general: ")
+
+if category_choice not in ['1', '2']:
+    print("Invalid choice. Exiting.")
+else:
+    category_choice = int(category_choice)
+    active = True
+    while active:
+        user_input = input("Enter query or input (type 'exit' to end): ")
+
+        if user_input.lower() == "exit":
+            print("🤖: Goodbye!")
+            break
+
+        response = simple_ai_chatbot(user_input, category_choice)
+        print("🤖:", response)
+
+        if "return" in response.lower() or "back" in response.lower():
+            print("-----WELCOME-----")
+            print("Choose a category:")
+            print("1. Healthcare-related queries")
+            print("2. General queries regarding Chatbot")
+            category_choice = input("Enter '1' for healthcare or '2' for general: ")
+            if category_choice not in ['1', '2']:
+                print("Invalid choice. Exiting.")
+                break
+            else:
+                category_choice = int(category_choice)
